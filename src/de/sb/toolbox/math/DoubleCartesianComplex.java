@@ -9,6 +9,10 @@ import java.util.concurrent.RecursiveAction;
 import de.sb.toolbox.Copyright;
 import de.sb.toolbox.math.FunctionTables.SwapEntry;
 
+import com.aparapi.Kernel;
+import com.aparapi.ProfileInfo;
+import com.aparapi.Range;
+import com.aparapi.Kernel.EXECUTION_MODE;
 
 /**
  * This class implements mutable {@code complex numbers} that store double precision {@Cartesian} coordinates.
@@ -389,6 +393,23 @@ public final class DoubleCartesianComplex extends Complex.AbstractDoublePrecisio
 	 */
 	private void fft (final int magnitude, final DoubleCartesianComplex[] vector) throws NullPointerException, ArrayIndexOutOfBoundsException {
 		assert 1 << magnitude == vector.length;
+		
+		
+		
+		// TODO HIER MUSS APARAPI ANGEWENDET WERDEN UND UMSTRUKTURIERT WERDEN (DIE FOR-SCHLEIFEN VOR ALLEN DINGEN). AUSKOMMENTIERTER CODE KOENNTE HILFREICH SEIN
+		
+		
+		
+//		Kernel kernel = new Kernel() {
+//            @Override
+//            public void run() {
+//                int i = getGlobalId();
+//                result[i] = intA[i] + inB[i];
+//            }
+//        };
+//        
+//        Range range = Range.create(result.length);
+//        kernel.execute(range);
 
 		for (final SwapEntry entry : FunctionTables.getPerfectShuffleTable(magnitude)) {
 			this.set(vector[entry.getLeft()]);
